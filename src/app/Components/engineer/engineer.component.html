@@ -1,0 +1,92 @@
+<div class="container">
+  
+
+    <div class="row">
+      <div class="col-md-10">
+        <p>Welcome, {{username}}  (Customer)</p>
+      </div>
+      <div class="col-md-2">
+        <div class="float-right"><button  type="submit" class="btn btn-outline-success"  (click)="logout()">Logout</button></div>
+      </div>
+    </div>
+  
+  <div class="row">  
+  <div class="col-md-9">
+    <table class="table table-striped" >
+        <thead class="bg-info">
+        <tr>
+          <th>Complaint Id</th>
+          <th>Title</th>
+          <th>Comlaint Type</th>
+          <th>Mobile</th>
+          <th>Pin</th>
+          <th>Status Type</th>
+          <th>Raised By</th>
+          <th></th>
+          
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of complaints">
+          <td >{{c.complaintId}}</td>
+          <td align="left">{{c.title}}</td>
+          <td align="left">{{c.complaintType}}</td>
+          <td align="left">{{c.mobile}}</td>
+          <td align="left">{{c.pin}}</td>
+          <td align="left">{{c.status}}</td>
+          <td align="left">{{c.raisedBy.identifier}}</td>
+          <td><button type="submit" (click)="edit(c)">edit</button></td>
+        </tr>
+      </tbody>
+      </table>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="modal" [class.modal]="showModal_AddComplaint">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div> 
+                      <form [formGroup]="complaintForm" (ngSubmit) = "onAddComplaint()">
+                          <div class="modal-body">
+                              <div class="form-group">
+                                <label for="complaintId" >Complaint Id</label>
+                                <input class="form-control" id="complaintId" formControlName="complaintId" type="text" />
+                                <label for="title"  >Title</label>
+                                <input class="form-control"  id="title" formControlName="title" type="text" required/>
+                                <label for="address" >Address</label>
+                                <input class="form-control"  id="address" formControlName="address" type="text"/>
+                                <label for="pin" >Pin</label>
+                                <input class="form-control"  id="pin" formControlName="pin" type="text"/>
+                                <label for="mobile"  >Mobile</label>
+                                <input class="form-control"  id="mobile" formControlName="mobile" type="text"/>
+                                <label for="complaintType" >Complaint Type</label>
+                                <input class="form-control"  id="complaintType" formControlName="complaintType" type="text"/>
+                                <label for="assignedTo">Assigned To</label>
+                                <select class="form-control"  id="assignedTo" formControlName="assignedTo_userId">
+                                    <option *ngFor="let u of engUsers" value="{{u.userId}}">{{u.identifier}}</option>
+                                </select>
+                                
+                                <label for="status" >Status</label>
+                                <select class="form-control"  id="status" formControlName="status">
+                                    <option>RAISED</option>
+                                    <option>WIP</option>
+                                    <option>RESOLVED</option>
+                                    <option>ESCALATED</option>
+                                </select>
+                                
+                              </div>
+                              <div class="form-group">
+                                  <button type="submit" class="btn btn-outline-success" >Update</button>
+                                  <button type="button" class="btn btn-outline-success right" (click)="clearAddComplaintmodal()">clear</button>
+                              </div>
+                          </div>
+                          
+                      </form>
+                  </div>
+              </div>           
+          </div>        
+      </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,20 @@
+<div class="container wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Login Form -->
+      <form [formGroup]="adminLoginForm" (ngSubmit)="login()">
+          <div class="form-group">
+              <input [(ngModel)]="admin.identifier" type="text" class="form-control" formControlName="uname" placeholder="login"><br>
+          </div>
+          <div class="form-group">
+              <input [(ngModel)]="admin.password" type="password" class="form-control" formControlName="password" placeholder="password"><br>
+          </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+      </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="formFooter" hidden>
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+  
+    </div>
+  </div>

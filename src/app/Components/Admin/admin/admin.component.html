@@ -1,0 +1,91 @@
+<div class="container">
+  
+
+  <div class="row">
+    <div class="col-md-10">
+      <p>Welcome, {{username}}</p>
+    </div>
+    <div class="col-md-2">
+      <div class="float-right"><button  type="submit" class="btn btn-outline-success"  (click)="logout()">Logout</button></div>
+    </div>
+  </div>
+
+<div class="row">  
+<div class="col-md-9">
+  <table class="table table-striped" >
+      <thead class="bg-info">
+      <tr>
+        <th>User Id</th>
+        <th>Identifier</th>
+        <th>email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>User Type</th>
+        <th>Status</th>
+        <th></th>
+        
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td (click)="updateUserForm(u)"><a routerLink="/user-detail/{{u.userId}}">{{u.userId}}</a></td>
+        <td align="left">{{u.identifier}}</td>
+        <td align="left">{{u.email}}</td>
+        <td align="left">{{u.firstName}}</td>
+        <td align="left">{{u.lastName}}</td>
+        <td align="left">{{u.userType}}</td>
+        <td align="left">{{u.status}}</td>
+        <td><button type="submit" (click)="delete(u.userId)">delete</button></td>
+      </tr>
+    </tbody>
+    </table>
+    </div>
+    <div class="col-md-3">
+      <div class="modal" [class.modal]="showModal_AddUser">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div> 
+                    <form [formGroup]="userForm" (ngSubmit) = "onAddUser()">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="userId" class="hidden">User Id</label>
+                                <input class="form-control" id="userId" formControlName="userId" type="text"/>
+                                <label for="identifier">Identifier</label>
+                                <input class="form-control" id="identifier" formControlName="identifier" type="text"/>
+                                <label for="email">Email</label>
+                                <input class="form-control" id="email" formControlName="email" type="text"/>
+                                <label for="">password</label>
+                                <input class="form-control" id="password" formControlName="password" type="text"/>
+                                <label for="firstName">First Name</label>
+                                <input class="form-control" id="firstName" formControlName="firstName" type="text"/>
+                                <label for="lastName">Last Name</label>
+                                <input class="form-control" id="lastName" formControlName="lastName" type="text"/>
+                                <label for="pin">Pin</label>
+                                <input class="form-control" id="pin" formControlName="pin" type="text"/>
+                                <label for="userType">User Type</label>
+                                <select class="form-control" id="userType" formControlName="userType">
+                                  <option value="cus">Customer</option>
+                                  <option value="eng">Engineer</option>
+                                  <option value="man">Manager</option>
+                                  
+                              </select>
+                                <label for="status">Status</label>
+                                <input class="form-control" id="status" formControlName="status" type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <button [hidden]="editUser" type="submit" class="btn btn-outline-success" >Add</button>
+                                <button [hidden]="!editUser" type="submit" class="btn btn-outline-success" >Update</button>
+                                <button type="button" class="btn btn-outline-success right" (click)="clearAddUsermodal()">clear</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>           
+        </div>        
+    </div>
+    </div>
+    </div>
+    
+</div>
